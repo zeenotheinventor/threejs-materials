@@ -42,6 +42,7 @@ const blocksRoughness = textureLoader.load("./blocks-roughness.jpg");
 const blocksAmbientOcclusion = textureLoader.load("./blocks-ambientocclusion.jpg");
 
 const comicFrontBaseColor = textureLoader.load("./jojo.jpg");
+const comicBackBaseColor = textureLoader.load("./captainb.jpg");
 const brickWallbasecolor = textureLoader.load("./Brick_Wall_017_basecolor.jpg");
 const brickWallnormalMap = textureLoader.load("./Brick_Wall_017_normal.jpg");
 const brickWallheightMap = textureLoader.load("./Brick_Wall_017_height.png");
@@ -106,7 +107,13 @@ const comicFront = new THREE.Mesh(
 comicFront.position.y = 3;
 comicFront.position.x = -4;
 
-const comicBack = comicFront.clone();
+const comicBack = new THREE.Mesh(
+  new THREE.PlaneGeometry(2, 2.8284),
+  new THREE.MeshStandardMaterial({ map: comicBackBaseColor }),
+);
+
+comicBack.position.y = 3;
+comicBack.position.x = -4;
 comicBack.rotateY(THREE.MathUtils.degToRad(180));
 
 const plane1 = new THREE.Mesh(
@@ -289,13 +296,13 @@ directionalLight.position.z += 20;
 
 // INIT HEMISPHERE LIGHT
 scene.add(new THREE.AmbientLight(0xffffff, 0.5));
-scene.add(comicFront);
-scene.add(comicBack);
+// scene.add(comicFront);
+// scene.add(comicBack);
 scene.add(plane1);
-// scene.add(plane2);
-// scene.add(plane3);
-// scene.add(plane4);
-// scene.add(plane5);
+scene.add(plane2);
+scene.add(plane3);
+scene.add(plane4);
+scene.add(plane5);
 
 scene.add(sphere0);
 scene.add(sphere1);
